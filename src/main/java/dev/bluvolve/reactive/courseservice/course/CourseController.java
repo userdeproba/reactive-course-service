@@ -7,7 +7,11 @@ import dev.bluvolve.reactive.courseservice.course.processors.CourseCreatedEventP
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 import javax.validation.Valid;
@@ -36,7 +40,7 @@ public class CourseController {
 
     @CrossOrigin
     @PostMapping("/course")
-    ResponseEntity<UUID> addCourse(@RequestBody @Valid CreateCourse command){
+    public ResponseEntity<UUID> addCourse(@RequestBody @Valid CreateCourse command){
         log.info("Create new course request received. [title: {}]", command.getTitle());
 
         try{
@@ -52,10 +56,7 @@ public class CourseController {
     @GetMapping(value = "/course/sse", produces = "text/event-stream;charset=UTF-8")
     public Flux<CourseDto> stream() {
         log.info("Start listening to the course collection.");
-        return this.events.map(event -> {
-            CourseDto dto = this.mapper.entityToDto((Course) event.getSource());
-            return dto;
-        });
+        return this.events.map(event -> this.mapper.entityToDto((Course) event.getSource()));
     }
 
     @CrossOrigin()

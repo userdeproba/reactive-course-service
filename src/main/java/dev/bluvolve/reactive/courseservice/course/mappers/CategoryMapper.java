@@ -1,7 +1,7 @@
 package dev.bluvolve.reactive.courseservice.course.mappers;
 
-import dev.bluvolve.reactive.courseservice.course.*;
-import dev.bluvolve.reactive.courseservice.course.commands.CreateCourse;
+import dev.bluvolve.reactive.courseservice.course.Category;
+import dev.bluvolve.reactive.courseservice.course.CategoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class CategoryMapper {
-    private final ModelMapper modelMapper;;
+    private final ModelMapper modelMapper;
 
     public CategoryMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;

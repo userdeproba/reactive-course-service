@@ -56,7 +56,7 @@ public class CourseService {
      */
     public List<CourseDto> getCourses() {
         return this.courseRepository.findAll()
-                .stream().map(c -> this.mapper.entityToDto(c))
+                .stream().map(this.mapper::entityToDto)
                 .collect(Collectors.toList());
     }
 }

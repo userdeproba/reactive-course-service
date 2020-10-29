@@ -47,7 +47,7 @@ public class CategoryService {
      */
     public List<CategoryDto> getCategories() {
         return this.repository.findAll()
-                .stream().map(c -> this.mapper.entityToDto(c))
+                .stream().map(this.mapper::entityToDto)
                 .collect(Collectors.toList());
     }
 }

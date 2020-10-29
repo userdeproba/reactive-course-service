@@ -3,7 +3,13 @@ package dev.bluvolve.reactive.courseservice.course;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;

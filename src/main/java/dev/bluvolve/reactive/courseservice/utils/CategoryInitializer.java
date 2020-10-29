@@ -7,7 +7,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -23,20 +23,17 @@ public class CategoryInitializer implements ApplicationListener<ApplicationReady
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        if (this.repository.count() > 0){
+        if (this.repository.count() > 0) {
             log.info("Category items already created.");
             return;
         }
 
-        List<Category> categories = new ArrayList<>() {
-            {
-                add(new Category("Bootcamp"));
-                add(new Category("Circuit Training"));
-                add(new Category("Gymnastics"));
-                add(new Category("Outdoor"));
-                add(new Category("Weight Training"));
-            }
-        };
+        List<Category> categories = Arrays.asList(
+            new Category("Bootcamp"),
+            new Category("Circuit Training"),
+            new Category("Gymnastics"),
+            new Category("Outdoor"),
+            new Category("Weight Training"));
 
         categories.forEach(category -> {
             this.repository.save(category);
